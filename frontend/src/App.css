@@ -1,0 +1,28 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+
+.nav{
+  background-color: #F2F2F2;
+  padding: 0.4rem 1rem;
+}
+
+nav{
+  margin: auto;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.acc{
+  display: flex;
+}
+
+#login{
+  margin-right: 1rem;
+} 
