@@ -4,11 +4,35 @@
   box-sizing: border-box;
 }
 
+/* Default Setting CSS */
+
+html{
+  font-family: sans-serif;
+  font-size: 62.5%;
+}
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+img{
+  width: 100%;
+  object-fit: cover;
+}
+
 /* Navbar */
 
 .nav{
   background-color: #F2F2F2;
   padding: 0.4rem 1rem;
+}
+
+#logo{
+  font-size: 3.5rem;
+  display: inline-block;
 }
 
 nav{
@@ -19,10 +43,74 @@ nav{
   justify-content: space-between;
 }
 
+.navInput{
+  background-color: #fff;
+}
+
+.search{
+  padding: 0.1rem 0.5rem;
+}
+
+.navInput input{
+  display: inline-block;
+  width: 400px;
+  border: none;
+  outline: none;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+}
+
 .acc{
+  display: inline-block;
   display: flex;
 }
 
 #login{
   margin-right: 1rem;
 } 
+
+
+/* Categories */
+
+.categories{
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(9,1fr);
+  align-items: center;
+  background-color: #F2F2F2;
+  margin: 2rem 0;
+}
+
+.category, .other{
+  text-align: center;
+  height: 100%;
+  padding: 0.8rem 0;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  border: 0.1rem solid rgb(201, 201, 201);
+}
+
+.other{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.8rem;
+}
+
+.category h4 a{
+  color: #000;
+}
+
+.all-category{
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  background-color: #F2F2F2;
+  /* padding: 1rem; */
+}
+
+.all-category h4{
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
