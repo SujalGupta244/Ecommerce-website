@@ -8,7 +8,7 @@ const allMainCategories = [...new Set(data.map(item => item.category))];
 const homeCategories = [...new Set(data.map(item => item.category))].slice(0,9);
 function Categories() {
 
-  const [show,setShow] = useState(true);
+  const [show,setShow] = useState(false);
   // console.log(allMainCategories);
   return (
     <div className="categories">
@@ -34,7 +34,7 @@ const Others = (props) =>{
   const {show,setShow} = props;
   return(
     <>
-      <div className="other">
+      <div className="other" onClick={()=>setShow(!show)}>
         <h4>Others</h4>
         <FaChevronDown/>
       </div>
@@ -42,7 +42,9 @@ const Others = (props) =>{
         <div className="all-category">
           {allMainCategories.map(category =>{
             return (
-            <h4 key={category}>{category}</h4> 
+              <div className="category">
+                <h4 key={category}>{category}</h4> 
+              </div>
             )
           })}
         </div>
