@@ -13,15 +13,100 @@ html{
 
 a{
   text-decoration: none;
+  color: black;
 }
 
 li{
   list-style: none;
 }
+
 img{
   width: 100%;
   object-fit: cover;
 }
+
+.btn{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 0.4rem;
+  background-color: hsl(205, 89%, 70%);
+  border: 1px solid hsl(205, 89%, 70%);
+  cursor: pointer;
+}
+
+.container{
+  /* background-color: #4b145b !important; */
+  width: 100% !important;
+  height: auto;
+  min-height: 90vh;
+  margin: 0 !important;
+  display: flex;
+  max-width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* max-width: 90vw;
+  margin: auto;
+  padding: 2rem; */
+  /* min-height: 90vh; */
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+
+.form{
+  background-color: #F2F2F2;
+  padding: 1rem;
+  border-radius: 0.8rem;
+   /* width: 50%; */
+}
+
+
+.form-group{
+  width: 800px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 2fr;
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 1rem;
+}
+
+
+/* Not Found Page */
+
+.not-found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90vw;
+  margin: auto;
+  padding: 4rem;
+  text-align: center;
+}
+
+.not-found img{
+  width: 600px;
+}
+
+.not-found button{
+  margin-top: 4rem;
+}
+
+
+
+
 
 /* Navbar */
 
@@ -42,6 +127,12 @@ nav{
   align-items: center;
   justify-content: space-between;
 }
+
+nav > h5{
+  font-size: 1.5rem;
+  color: #000;
+}
+
 
 .navInput{
   background-color: #fff;
@@ -67,6 +158,8 @@ nav{
 
 #login{
   margin-right: 1rem;
+  padding: 0.4rem 2rem;
+  font-size: 1.8rem;
 } 
 
 
@@ -157,4 +250,47 @@ nav{
   padding-top: 1rem;
   font-size: 1.4rem;
   color: #000 ;
+}
+
+
+/* Dashboard */
+
+.dashboard{
+  height: calc(100vh - 55px);
+  display: grid;
+  grid-template-columns: 1fr 3.5fr;
+}
+
+.adminLeft{
+  background-color: #F2F2F2;
+  padding: 2rem;
+  text-align: center;
+}
+
+.adminLeft h1{
+  font-size: 3rem;
+}
+.adminRight{
+  padding: 2rem;
+}
+
+
+.user-form h1{
+  text-align: center;
+  padding-bottom: 1rem;
+  font-size: 3rem;
+}
+
+.form-group label{
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.form-group input{
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.8rem;
+  border: 1px solid #ddd;
+  outline: none;
+  border-radius: 0.4rem;
 }

@@ -21,8 +21,9 @@ function Nav() {
                         {!isLogin && <Link to={"/login"}>Login</Link>}
                         {isLogin && <Link to={"/logout"}>Logout</Link>}
                     </button>
-                    <h5><Link to={"/User/Account"} >Account</Link></h5>
                 </div>
+                    <h5><Link to={"/User/Account"} >Account</Link></h5>
+                    <h5><Link to={"/admin/dashboard"} >Admin</Link></h5>
             </nav>
         </div>
 

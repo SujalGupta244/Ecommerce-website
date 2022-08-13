@@ -1,0 +1,40 @@
+user
+[
+first_name,
+last_name,
+address,
+city,
+country,
+contact_no,
+email,
+password
+]
+add_user(user_id, properties)
+update_user(user_id, properties)
+remove_user(user_id)
+register_get_all_users_callback(
+	(users)=>{
+		// Do something with user data
+	}
+)
+
+
+// Mandatory to call after previous method 
+// to save memory
+unregister_get_all_users_callback()
+
+
+
+register_get_user_callback(user_id, 
+	(user)=>{
+		// Do something with single user data
+	}
+)
+
+
+// Mandatory to call after previous method 
+// to save memory
+unregister_get_user_callback(user_id)
+
+
+
