@@ -1,20 +1,28 @@
 import React , {useState} from "react";
 import data from '../../data.js';
 import {Link} from 'react-router-dom';
-
 import {FaChevronDown} from 'react-icons/fa'
 
-const allMainCategories = [...new Set(data.map(item => item.category))];
-const homeCategories = [...new Set(data.map(item => item.category))].slice(0,9);
+
+const allcategories = data.reduce((array,item) =>{
+  item.category.forEach(cat =>{
+    array.push(cat);
+  })
+  return array;
+},[]);
+const allMainCategories = [...new Set(allcategories.map(item => item))];
+const homeCategories = [...new Set(allcategories.map(item => item))].slice(0,9);
+
+
 function Categories() {
 
   const [show,setShow] = useState(false);
   // console.log(allMainCategories);
   return (
     <div className="categories">
-      {homeCategories.map(category =>{
+      {homeCategories.map((category,index) =>{
         return (
-         <Category category={category} key={category}/> 
+         <Category category={category} key={index}/> 
         )
       })}
       <Others show={show} setShow={setShow}/>

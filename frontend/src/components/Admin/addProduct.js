@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 function AddProduct() {
-  const [product,setProduct] = useState({id:'', name: '', full_name: '',img: '',category: [],sub_category: '',amount : 0})
+  const [product,setProduct] = useState({id:'', name: '', full_name: '',img: '',category: [],sub_category: '',amount : 0, details: ''})
 
     const handleChange = (e) =>{
         const {name,value} = e.target;
@@ -10,7 +10,7 @@ function AddProduct() {
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(product);
-        setProduct({id:'', name: '', full_name: '',img: '',category: [],sub_category: '',amount : 0});
+        setProduct({id:'', name: '', full_name: '',img: '',category: [],sub_category: '',amount : 0, details: ''});
     }
   return(
     <div className="container">
@@ -43,6 +43,10 @@ function AddProduct() {
             <div className="form-group">
                 <label htmlFor="amount">Amount</label>
                 <input type="number" id="amount" name="amount" value={product.amount} onChange={handleChange}/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="details">Prdouct Details</label>
+                <textarea id="details" name="details" value={product.details} onChange={handleChange}></textarea>
             </div>
             <button className="btn" type="submit" onClick={handleSubmit}>Submit</button>
         </form>
