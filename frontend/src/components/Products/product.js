@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from "react";
 import { useParams , Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import data from "../../data";
-import img1 from '../../assets/img/1.jpg'
+import img1 from '../../assets/img/12900KF.jpg'
 import { FaRupeeSign } from "react-icons/fa";
 
 function Product() {
@@ -37,7 +37,7 @@ function Product() {
           <div className="product-btns">
             <button className="cart-btn btn">Add to Cart</button>
             <button className="buy-btn btn">
-              <Link to={`/buy/${id}`}>Buy Now</Link>
+              <Link to={`/checkout`}>Buy Now</Link>
             </button>
           </div>
         </div>

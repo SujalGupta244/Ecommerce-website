@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import img1 from '../../assets/img/12900KF.jpg';
 import data from "../../data";
 function Dashboard() {
   return (
-    <div className="dashboard">
+    <div className="dashboard container">
       <div className="adminLeft">
         <div className="admImg">
-          <img src="" alt="admin Img" />
+          <img src={img1 || "not Found"} alt="admin Img" />
         </div>
         <h1>Admin Page</h1>
       </div>

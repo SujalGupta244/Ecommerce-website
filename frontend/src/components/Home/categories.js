@@ -11,7 +11,7 @@ const allcategories = data.reduce((array,item) =>{
   return array;
 },[]);
 const allMainCategories = [...new Set(allcategories.map(item => item))];
-const homeCategories = [...new Set(allcategories.map(item => item))].slice(0,9);
+const homeCategories = [...new Set(allcategories.map(item => item))].slice(0,8);
 
 
 function Categories() {
@@ -51,7 +51,9 @@ const Others = (props) =>{
           {allMainCategories.map(category =>{
             return (
               <div className="category">
-                <h4 key={category}>{category}</h4> 
+                <h4 key={category}>
+                <Link to={`/products/${category}`}>{category}</Link>
+                </h4> 
               </div>
             )
           })}

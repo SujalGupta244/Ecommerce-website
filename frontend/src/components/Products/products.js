@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import data from "../../data";
-import img1 from '../../assets/img/1.jpg';
+import img1 from '../../assets/img/12900KF.jpg'
 
 function Products() {
     const [filterData,setFiltrData] = useState([]);
     const {category} = useParams();
-    const filtercategories = data.reduce((array,item) =>{
-        item.category.forEach(cat =>{
-            if(cat === category){
-                array.push(item);
-            }
-        })
-        return array;
-    },[]);
+    const filtercategories = data.filter((item) =>{
+        if(item.category.includes(category)){
+            return item;
+        }
+    });
 
     // console.log(filtercategories);
     useEffect(() => {
