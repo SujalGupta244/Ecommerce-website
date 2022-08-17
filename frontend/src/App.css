@@ -33,6 +33,10 @@ svg{
   cursor: pointer;
 }
 
+textarea{
+  font-family: sans-serif;
+}
+
 .btn{
   font-size: 1.5rem;
   font-weight: 600;
@@ -223,6 +227,31 @@ nav > h5{
 .cart-logo{
   font-size: 1.8rem;
 }
+
+/* Account Page */
+
+.account{
+  margin: auto;
+  max-width: 60%;
+  width: 90%;
+  background-color: #F2F2F2;
+  display: grid;
+  grid-auto-flow: column;
+  /* grid-template-columns: 1fr 1fr; */
+  padding: 4rem;
+  grid-gap: 2rem;
+}
+
+.acc-left, .acc-right{
+  background-color: #fff;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0.8rem;
+  font-size: 2rem;
+  max-width: 400px;
+  cursor: pointer;
+}
+
 
 /* Login Page */
 

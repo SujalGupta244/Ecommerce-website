@@ -3,8 +3,13 @@ import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import data from "../../data";
 import img1 from '../../assets/img/12900KF.jpg'
+import {useGlobalContext} from '../../context'; 
+
+// register_get_all_product_items_callback
 
 function Products() {
+
+    const {prod} = useGlobalContext()
     const [filterData,setFiltrData] = useState([]);
     const {category} = useParams();
     const filtercategories = data.filter((item) =>{
@@ -12,6 +17,13 @@ function Products() {
             return item;
         }
     });
+
+    const show = (items) =>{
+        console.log(items);
+    }
+    prod.register_get_all_product_items_callback(show)
+
+    console.log();
 
     // console.log(filtercategories);
     useEffect(() => {

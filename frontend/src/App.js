@@ -21,6 +21,8 @@ import NotFound from './components/NotFound';
 // import {useGlobalContext} from './context';
 import './App.css';
 
+// import * as backend from '../../backend/index'; 
+
 
 function App() {
   
@@ -30,6 +32,7 @@ function App() {
     if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
     if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
   });
+  
 
   // document.addEventListener("keydown", function(event) {
   //   console.log(event.which);
