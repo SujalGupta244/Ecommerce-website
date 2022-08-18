@@ -1,6 +1,6 @@
 import React , { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {User} from '../../backend/index'; 
+import {User} from '../../firebase/firebase'; 
 // import { useId } from "react-id-generator";
 // import nextId from "react-id-generator";
 
@@ -26,6 +26,9 @@ function SignUp() {
             return;
         }
         setId(Math.random().toString().slice(2));
+        
+        // Add User to the Database
+
         user.add_user(id,userDetail);
         navigate('/')
         setUserDetail({first_name : '',last_name : '',address : '',city : '',country : '',contact_no : 0 ,email : '',password : ''});

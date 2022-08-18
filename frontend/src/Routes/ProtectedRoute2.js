@@ -1,9 +1,9 @@
 // import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, isAdmin }) => {
+const ProtectedRoute2 = ({ children, isUser}) => {
 
-    if(!isAdmin){
+    if(!isUser){
         return (
             <Navigate to={'/login'}/>
         )
@@ -20,4 +20,4 @@ const ProtectedRoute = ({ children, isAdmin }) => {
     // );
 };
 
-export default ProtectedRoute;
+export default ProtectedRoute2;

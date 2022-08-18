@@ -19,10 +19,16 @@ function Products() {
     });
 
     const show = (items) =>{
-        console.log(items);
+        // console.log(Object.values(items));
+        console.log((items));
     }
-    prod.register_get_all_product_items_callback(show)
 
+    const showItem = (item) =>{
+        console.log((item));
+    }
+
+    prod.register_get_all_product_items_callback(show)
+    prod.register_get_product_item_callback('-N9ebdl148UB83R4xqs1', showItem)
     console.log();
 
     // console.log(filtercategories);

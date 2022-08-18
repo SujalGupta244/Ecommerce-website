@@ -1,5 +1,22 @@
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, push, update, onValue, off, remove} from "firebase/database";
+import {getAuth , GoogleAuthProvider, EmailAuthProvider} from 'firebase/auth';
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDIllNan0ELpn_oFjY30pKP3IYVyo9Xlds",
+    authDomain: "ecommerce-website-40887.firebaseapp.com",
+    databaseURL: "https://ecommerce-website-40887-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-website-40887",
+    storageBucket: "ecommerce-website-40887.appspot.com",
+    messagingSenderId: "421238770660",
+    appId: "1:421238770660:web:fd39307a09e439cf96d5f1",
+    measurementId: "G-RQNJEK7Z67"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
 export class User{
 
@@ -307,7 +324,7 @@ export class ProductTransaction{
             'amount',
             'discount',
             'net_amount',
-            'trans_mode'
+            'trans_mode',
         ]
     }
 
@@ -369,4 +386,3 @@ export class ProductTransaction{
         off(product_transaction_reference);
     }
 }
-

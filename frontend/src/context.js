@@ -1,9 +1,12 @@
-import React , {useContext} from "react";
-import {User, ProductCategory, ProductItem, ProductTransaction} from './backend/index'; 
+import React , {useContext, useState} from "react";
+import {User, ProductCategory, ProductItem, ProductTransaction} from './firebase/firebase'; 
 
 const AppContext = React.createContext();
 
 function AppProvider({children}) {
+
+  const [isUser,setIsUser] = useState({});
+  const [isAdmin,setIsAdmin] = useState({});
  
   const user = new User();
   const prod = new ProductItem();
@@ -11,7 +14,15 @@ function AppProvider({children}) {
   const productTransaction = new ProductTransaction();
   
   return (
-    <AppContext.Provider value={{user,prod,productCategory,productTransaction}}>
+    <AppContext.Provider value={{
+      user,
+      prod,
+      productCategory,
+      productTransaction,
+      isAdmin,
+      isUser,
+      setIsAdmin,
+      setIsUser}}>
         {children}
     </AppContext.Provider>
   );

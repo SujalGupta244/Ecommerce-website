@@ -371,6 +371,11 @@ nav > h5{
   grid-template-columns: 1fr 3.5fr;
 }
 
+.admImg{
+  width: 250px;
+  margin: auto;
+}
+
 .adminLeft{
   background-color: #F2F2F2;
   padding: 2rem;

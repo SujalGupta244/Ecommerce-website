@@ -17,8 +17,9 @@ import Cart from './components/Cart/cart';
 import Checkout from './components/Cart/checkout';
 import Footer from './components/Layouts/footer';
 import ProtectedRoute from './Routes/ProtectedRoute';
+import ProtectedRoute2 from './Routes/ProtectedRoute2';
 import NotFound from './components/NotFound';
-// import {useGlobalContext} from './context';
+import {useGlobalContext} from './context';
 import './App.css';
 
 // import * as backend from '../../backend/index'; 
@@ -33,6 +34,7 @@ function App() {
     if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
   });
   
+  const {isAdmin, isUser} = useGlobalContext()
 
   // document.addEventListener("keydown", function(event) {
   //   console.log(event.which);
@@ -48,15 +50,15 @@ function App() {
         <Route path='/' element={<Home/>}></Route>
 
         <Route path="/admin/dashboard" element={
-          <ProtectedRoute isAdmin={true} user={true}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard/>
           </ProtectedRoute>
         }></Route>
 
         <Route path="/User/Account"element={
-          <ProtectedRoute user={true} isAdmin={true}>
+          <ProtectedRoute2 isUser={false} >
             <Account/>
-          </ProtectedRoute>
+          </ProtectedRoute2>
         }></Route>
 
         <Route path="/login"element={<Login/>}></Route>
