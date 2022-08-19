@@ -1,9 +1,10 @@
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, push, update, onValue, off, remove} from "firebase/database";
-import {getAuth , GoogleAuthProvider, EmailAuthProvider} from 'firebase/auth';
-
-
+import {getAuth , GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail, signOut} from 'firebase/auth';
+import {getDocs, where, query , addDoc, collection, getFirestore} from 'firebase/firestore';
+import { useGlobalContext } from "../context";
 const firebaseConfig = {
+    
     apiKey: "AIzaSyDIllNan0ELpn_oFjY30pKP3IYVyo9Xlds",
     authDomain: "ecommerce-website-40887.firebaseapp.com",
     databaseURL: "https://ecommerce-website-40887-default-rtdb.firebaseio.com",
@@ -16,7 +17,72 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
+const db = getFirestore(app)
+
+const googleProvider = new GoogleAuthProvider() 
+
+// export const signUpWithGoogle = () => {
+//     signInWithPopup(auth ,googleProvider)
+// };
+// Sign up button of google on signup page
+export const signUpWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const user = res.user;
+      const q = query(collection(db, "users"), where("uid", "==", user.uid));
+      const docs = await getDocs(q);
+      if (docs.docs.length === 0) {
+        await addDoc(collection(db, "users"), {
+          uid: user.uid,
+          name: user.displayName,
+          authProvider: "google",
+          email: user.email,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+};
+
+// Signup form on SignUp page
+export const registerWithEmailAndPassword = async (name, email, password) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      const q = query(collection(db, "users"), where("uid", "==", user.uid));
+      const docs = await getDocs(q);
+      if (docs.docs.length === 0) {
+        await addDoc(collection(db, "users"), {
+          uid: user.uid,
+          name: name,
+          authProvider: "google",
+          email: user.email,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+};
+
+// Login form on login page
+export const logInWithEmailAndPassword = (email, password) => signInWithEmailAndPassword(auth, email, password);
+
+export const sendPasswordReset = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset link sent!");
+    } catch (err) {
+      console.error(err);
+    //   alert(err.message);
+    }
+  };
+
+export const logout = () => {
+    signOut(auth);
+  };
 
 export class User{
 
@@ -37,9 +103,6 @@ export class User{
         this.user_properties = [
             'first_name',
             'last_name',
-            'address',
-            'city',
-            'country',
             'contact_no',
             'email',
             'password'
@@ -227,7 +290,6 @@ export class ProductItem{
         this.db = getDatabase(this.app);
         this.product_item_table = "product_item/";
         this.product_item_properties = [
-            'product_id',
             'product_name',
             'rate',
             'opening_stock',

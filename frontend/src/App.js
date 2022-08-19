@@ -20,6 +20,7 @@ import ProtectedRoute from './Routes/ProtectedRoute';
 import ProtectedRoute2 from './Routes/ProtectedRoute2';
 import NotFound from './components/NotFound';
 import {useGlobalContext} from './context';
+
 import './App.css';
 
 // import * as backend from '../../backend/index'; 
@@ -39,7 +40,7 @@ function App() {
   // document.addEventListener("keydown", function(event) {
   //   console.log(event.which);
   // })
-
+  
   useEffect(()=>{
     document.title = "Ecommerce Website";
   })
@@ -56,7 +57,7 @@ function App() {
         }></Route>
 
         <Route path="/User/Account"element={
-          <ProtectedRoute2 isUser={false} >
+          <ProtectedRoute2 isUser={isUser}>
             <Account/>
           </ProtectedRoute2>
         }></Route>
@@ -70,7 +71,13 @@ function App() {
         <Route path="/products/:category" element={<Products/>}></Route>
         <Route path="/products/:category/:productId" element={<Product/>}></Route>
         <Route path="/featureProducts/:productId" element={<Product/>}></Route>
-        <Route path="/cart" element={<Cart/>}></Route>
+
+        <Route path="/cart" element={
+          <ProtectedRoute2 isUser={isUser}>
+            <Cart/>
+          </ProtectedRoute2>
+        }></Route>
+
         <Route path="/checkout" element={<Checkout/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
       </Routes>

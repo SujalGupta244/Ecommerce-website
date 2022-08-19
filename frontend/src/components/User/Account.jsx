@@ -1,7 +1,9 @@
 import React ,{ useEffect } from 'react';
-
+import { useGlobalContext } from '../../context';
 
 const Account = () =>{
+    const {isUser} = useGlobalContext();
+    console.log(isUser);
     return(
         <div className="container">
             <h1>Your Account</h1>

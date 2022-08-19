@@ -1,76 +1,74 @@
-import React ,{ useState }  from "react";
+import React ,{ useEffect, useState }  from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context";
+import { logInWithEmailAndPassword, signUpWithGoogle } from "../../firebase/firebase";
+// import GoogleButton from 'react-google-button'
+// import firebase from './firebase'
 
 const Login = () =>{
-    const {isUser,user, setIsUser} = useGlobalContext()
+    const {isUser, addUserDetails} = useGlobalContext()
 
     const [loginDetails,setLoginDetails] = useState({email:'',password:''});
     const [fail,setFail] = useState({fail: false, message : ''});
+
     const navigate = useNavigate()
+    
     const handleChange = (e) =>{
         const {name,value} = e.target;
         setLoginDetails({...loginDetails,[name]:value});
     }
 
-
-    const getUser = (users) =>{
-        let use = (Object.values(users)).find(user =>{
-            if(user.email === loginDetails.email && user.password === loginDetails.password){
-                return user;
-            }
+    const handleLogin = (e) =>{
+        e.preventDefault()
+        logInWithEmailAndPassword(loginDetails.email,loginDetails.password)
+        .then(res =>{
+            addUserDetails(res.user);
+            setLoginDetails({email:'',password:''});
+            navigate('/');
         })
-        if(use){
-            setIsUser(use);
-        }else{
-            setFail({fail: true,message : "No User Found"});
-            setIsUser({});
-        }
+        .catch(err => {
+            setFail({fail: true,message: `${err}`})
+        })
+        console.log(isUser);
     }
 
-
-    const handleSubmit = (e) =>{
+    const handleLoginGoogle = (e) =>{
         e.preventDefault()
-        if(!loginDetails.email || !loginDetails.password){
-            setFail({fail: true,message: "Please enter Your Details"})
-            return;
-        }
-        
-        // Find the user from Database
-        user.register_get_all_users_callback(getUser);
-        
-        
-        if(isUser === {}){
-            setFail({fail: true,message : "No User Found"});
-            return;
-        }
-
-        console.log(isUser);
-        // setIsUser(user.register_get_all_users_callback(getUser));
-        // navigate('/');
-        setLoginDetails({email:'',password:''});
+        // signUpWithGoogle()
     }
     return (
         <div className="container">
+            {/*  */}
             <div className="login">
-                <form className="login-form form">
-                    <h1>Login</h1>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" value={loginDetails.email} id="email" onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" minLength={8} value={loginDetails.password} id="password" onChange={handleChange}/>
-                    </div>
+                <form className="login__container login-form">
+            <h1 style={{margin: '2rem auto'}}>Login</h1>
+                    <input
+                    type="text"
+                    name="email"
+                    className="login__textBox"
+                    value={loginDetails.email}
+                    onChange={handleChange}
+                    placeholder="E-mail Address"
+                    />
+                    <input
+                    type="password"
+                    name="password"
+                    className="login__textBox"
+                    value={loginDetails.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    />
                     {fail.fail && <h3 className="fail">{fail.message}</h3>}
-                    <Link to={'/signup'}><h2>new loginDetails ? sign up</h2></Link>
-                    <button className="login-btn btn" type="submit" onClick={handleSubmit}>Login</button>
+                    <button className="login__btn" onClick={handleLogin}>Login</button>
+                    {/* <button className="login__btn login__google"onClick={handleLoginGoogle} >Login with Google</button> */}
+                    <h3><Link to="/reset">Forgot Password</Link></h3>
+                    <h2>Don't have an account? <Link to="/signup">Register</Link> now.</h2>
                 </form>
+                </div>
             </div>
-
-        </div>
     )
 }
 
 export default Login;
+
+

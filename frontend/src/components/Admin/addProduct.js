@@ -9,9 +9,9 @@ import { useGlobalContext } from "../../context";
 
 function AddProduct() {
     const {prod} = useGlobalContext();
-    const [product,setProduct] = useState({product_id : '',product_name : '',rate : '',opening_stock : '',img: '',category: [], details: ''})
+    const [product,setProduct] = useState({product_name : '',rate : '',opening_stock : '',img: '',category: [], details: ''})
 
-    const [id,setId] =  useState(Math.random().toString().slice(2));
+    // const [id,setId] =  useState(Math.random().toString().slice(2));
 
 
     const handleChange = (e) =>{
@@ -22,15 +22,15 @@ function AddProduct() {
         e.preventDefault()
         if(!product.product_name || !product.rate || !product.opening_stock || !product.img || !product.category || !product.details) return;
         
-        setId(Math.random().toString().slice(2));
-        product.product_id = id;
+        // setId(Math.random().toString().slice(2));
+        // product.product_id = id;
         // product.category = product.category.match(/\w+/g);
         
         // setProduct({...product,product_id: id})
         // setProduct({...product,[product.category]: product.category});
         console.log(product);
         prod.add_product_item(product);
-        setProduct({product_id : '',product_name : '',rate : '',opening_stock : '',img: '',category: [], details: ''});
+        setProduct({product_name : '',rate : '',opening_stock : '',img: '',category: [], details: ''});
     }
   return(
     <div className="container">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import data from "../../data";
@@ -10,32 +10,42 @@ import {useGlobalContext} from '../../context';
 function Products() {
 
     const {prod} = useGlobalContext()
-    const [filterData,setFiltrData] = useState([]);
+    const [filterData,setFilterData] = useState([]);
     const {category} = useParams();
     const filtercategories = data.filter((item) =>{
-        if(item.category.includes(category)){
+        if(item.category === category){
             return item;
         }
     });
 
-    const show = (items) =>{
+    let s = '';
+    
+    useEffect(()=>{
+        prod.register_get_all_product_items_callback(getAllItems)
+        // prod.register_get_product_item_callback('-N9ebdl148UB83R4xqs1', showItem)
+    },[category])
+    // console.log();
+    
+    // Get all products from the database
+    const getAllItems = (items) =>{
         // console.log(Object.values(items));
-        console.log((items));
-    }
+        const filtercategories = Object.entries(items).map(([key,item]) =>{
+                return {product_id : key,...item};
+        })
+        .filter((item) =>{
+            if(item.category === category){
+                return item;
+            }
+        })
+
+        // Set all product according to their categories 
+        setFilterData(filtercategories);
+
+    };
 
     const showItem = (item) =>{
         console.log((item));
     }
-
-    prod.register_get_all_product_items_callback(show)
-    prod.register_get_product_item_callback('-N9ebdl148UB83R4xqs1', showItem)
-    console.log();
-
-    // console.log(filtercategories);
-    useEffect(() => {
-        setFiltrData(filtercategories)
-    }, [data]);
-    
 
     return (
     <>
@@ -54,26 +64,25 @@ function Products() {
 }
 
 const Item = React.memo((props) =>{
-    const {category} = useParams();
-    const {id,full_name,img, price} = props;
+    // const {category} = useParams();
+    const {product_id,product_name,category,opening_stock, details ,img, rate} = props;
     return(
     <div className="item">
-                <Link to={`/products/${category}/${id}`}>
-                    <img src={img || img1} alt={full_name} />
-                    <h5>{full_name}</h5>
-                    <h4>{price}</h4>
+                <Link to={`/products/${category}/${product_id}`}>
+                    <img src={img || img1} alt={product_name} />
+                    <h5>{product_name}</h5>
+                    <h4>{rate}</h4>
                 </Link>
             </div>
     )
 })
 
 Item.propTypes = {
-    id : PropTypes.string.isRequired,
-    name : PropTypes.string.isRequired,
+    product_id : PropTypes.string.isRequired,
+    product_name : PropTypes.string.isRequired,
     img : PropTypes.string.isRequired,
-    category : PropTypes.array.isRequired,
-    sub_category : PropTypes.string.isRequired,
-    amount : PropTypes.number.isRequired,
+    category : PropTypes.string.isRequired,
+    rate : PropTypes.string.isRequired,
 }
 
 Item.defaultProps = {

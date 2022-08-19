@@ -2,10 +2,19 @@ import React ,{useState} from "react";
 import { FaSearch } from "react-icons/fa";
 import {GrCart} from 'react-icons/gr'
 import {Link} from 'react-router-dom';
+import {useGlobalContext} from '../../context';
+import {logout} from '../../firebase/firebase'
 
 function Nav() {
+    const {isUser, removeUserDetails ,isLogin} = useGlobalContext()
+    // const [isLogin,setIsLogin] = useState(false);
 
-    const [isLogin,setIsLogin] = useState(false);
+    const handleLogout = () => {
+        logout();
+        removeUserDetails();
+        // console.log(isUser);
+    }
+    console.log(isUser);
     return (
         <div className="nav">
             <nav>
@@ -18,9 +27,9 @@ function Nav() {
                 </div>
 
                 <div className="acc">
-                    <button id="login">
-                        {!isLogin && <Link to={"/login"}>Login</Link>}
-                        {isLogin && <Link to={"/logout"}>Logout</Link>}
+                    <button id="login" >
+                        {!isLogin ? <Link to={"/login"} >Login</Link> : <span onClick={handleLogout}><Link to={'/'}>Logout</Link></span>}
+                        {/* {isUser && } */}
                     </button>
                 </div>
                     <h5><Link to={"/User/Account"} >Account</Link></h5>
