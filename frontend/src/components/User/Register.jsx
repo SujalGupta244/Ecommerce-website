@@ -1,23 +1,25 @@
 import React , { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {User} from '../../firebase/firebase'; 
 import {registerWithEmailAndPassword} from '../../firebase/firebase'
-import { signUpWithGoogle, logInWithEmailAndPassword } from "../../firebase/firebase";
+import { signUpWithGoogle, logInWithEmailAndPassword ,auth} from "../../firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import GoogleButton from 'react-google-button';
 // import {useGlobalContext} from '../../context';
 
 function SignUp() {
 
     // const {addUserDetails} = useGlobalContext()
-
+    const [user, loading, error] = useAuthState(auth);
+    
     const [userDetail,setUserDetail] = useState({first_name : '',last_name : '' ,email : '',password : ''})
     const [id,setId] =  useState(Math.random().toString().slice(2));
     const [fail,setFail] = useState({fail: false, message : ''});
     
     const navigate = useNavigate();
-    
+    // const history = useHistory()
     // const idList = useId(1);
-    const user = new User();
+    // const user = new User();
     
     const handleChange = (e) =>{
         const {name,value} = e.target;
@@ -27,16 +29,16 @@ function SignUp() {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(userDetail);
+        // console.log(userDetail);
         if(!userDetail.first_name || !userDetail.last_name || !userDetail.email || !userDetail.password ){
             setFail({fail: true,message: "Please enter Your Details"})
             return;
         }
-        setId(Math.random().toString().slice(2));
+        // setId(Math.random().toString().slice(2));
         
         // Add User to the Database
 
-        registerWithEmailAndPassword(`${user.first_name} ${user.last_name}`,userDetail.email,userDetail.password);
+        registerWithEmailAndPassword(`${userDetail.first_name} ${userDetail.last_name}`,userDetail.email,userDetail.password);
         // user.add_user(id,userDetail);
         // navigate('/')
         setUserDetail({first_name : '',last_name : '' ,email : '',password : ''});
@@ -47,6 +49,10 @@ function SignUp() {
         signUpWithGoogle()
     }
 
+    useEffect(() => {
+        if (loading) return;
+        // if (user) console.log(user);;
+      }, [user, loading]);
     // console.log(user.add_user);
 
   return (
@@ -71,8 +77,9 @@ function SignUp() {
             </div>
             {fail.fail && <h3 className="fail">{fail.message}</h3>}
             <button className="btn" type="submit" onClick={handleSubmit}>Sign Up</button>
-            <h2 style={{paddingBottom: '2rem',fontSize: '2rem'}}>or</h2>
-            <GoogleButton label='Sign Up with Google' className='signup' onClick={signUpWithGoogle} type='light'/>
+            <h2  style={{paddingBottom: '2rem',fontSize: '2rem'}}>or</h2>
+            <h2 style={{padding: '2rem',fontSize: '2rem',color:'hsl(205, 89%, 70%)'}}>Already have an account ? <Link to="/login">Login</Link> now.</h2>
+            {/* <GoogleButton label='Sign Up with Google' className='signup' onClick={signUpWithGoogle} type='light'/> */}
         </form>
 
     </div>

@@ -18,6 +18,7 @@ import Checkout from './components/Cart/checkout';
 import Footer from './components/Layouts/footer';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import ProtectedRoute2 from './Routes/ProtectedRoute2';
+import ProtectedRoute3 from './Routes/ProtectedRoute3';
 import NotFound from './components/NotFound';
 import {useGlobalContext} from './context';
 
@@ -62,15 +63,19 @@ function App() {
           </ProtectedRoute2>
         }></Route>
 
-        <Route path="/login"element={<Login/>}></Route>
+        <Route path="/login"element={
+          // <ProtectedRoute3 isUser={isUser}>
+            <Login/>
+          // </ProtectedRoute3>
+        }></Route>
         <Route path="/signup"element={<SignUp/>}></Route>
         <Route path="/admin/dashboard/addUser"element={<AddUser/>}></Route>
         <Route path="/admin/dashboard/updateUser"element={<UpdateUser/>}></Route>
         <Route path="/admin/dashboard/addProduct"element={<AddProduct/>}></Route>
-        <Route path="/admin/dashboard/updateProduct"element={<UpdateProduct/>}></Route>
+        <Route path="/admin/dashboard/updateProduct/:prodId" element={<UpdateProduct/>}></Route>
         <Route path="/products/:category" element={<Products/>}></Route>
-        <Route path="/products/:category/:productId" element={<Product/>}></Route>
-        <Route path="/featureProducts/:productId" element={<Product/>}></Route>
+        <Route path="/products/:category/:productName" element={<Product/>}></Route>
+        <Route path="/featureProducts/:productName" element={<Product/>}></Route>
 
         <Route path="/cart" element={
           <ProtectedRoute2 isUser={isUser}>
@@ -79,7 +84,7 @@ function App() {
         }></Route>
 
         <Route path="/checkout" element={<Checkout/>}></Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/*' element={<NotFound/>}></Route>
       </Routes>
       <Footer/>
     </BrowserRouter>

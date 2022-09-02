@@ -2,7 +2,9 @@ import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, push, update, onValue, off, remove} from "firebase/database";
 import {getAuth , GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail, signOut} from 'firebase/auth';
 import {getDocs, where, query , addDoc, collection, getFirestore} from 'firebase/firestore';
-import { useGlobalContext } from "../context";
+import {getStorage} from 'firebase/storage';
+// import { useGlobalContext } from "../context";
+
 const firebaseConfig = {
     
     apiKey: "AIzaSyDIllNan0ELpn_oFjY30pKP3IYVyo9Xlds",
@@ -17,8 +19,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app)
+export const auth = getAuth(app);
+export const db = getFirestore(app)
+export const storage = getStorage(app);
 
 const googleProvider = new GoogleAuthProvider() 
 
@@ -51,24 +54,26 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      const q = query(collection(db, "users"), where("uid", "==", user.uid));
-      const docs = await getDocs(q);
-      if (docs.docs.length === 0) {
+    //   console.log(user) ;
+    //   const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    //   const docs = await getDocs(q);
+    //   if (docs.docs.length === 0) {
         await addDoc(collection(db, "users"), {
           uid: user.uid,
-          name: name,
-          authProvider: "google",
-          email: user.email,
+          name,
+          authProvider: "local",
+          email,
         });
-      }
+    //   }
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      console.log(err);
+    //   alert(err.message);
     }
 };
 
 // Login form on login page
 export const logInWithEmailAndPassword = (email, password) => signInWithEmailAndPassword(auth, email, password);
+
 
 export const sendPasswordReset = async (email) => {
     try {
@@ -293,7 +298,8 @@ export class ProductItem{
             'product_name',
             'rate',
             'opening_stock',
-            'img',
+            'imgFile',
+            'imgUrl',
             'category',
             'details',
         ]

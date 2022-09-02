@@ -1,0 +1,37 @@
+{
+  "product_item": {
+    "-N9euyfBWgmdLwKJ50jA": {
+      "category": "processor",
+      "details": "jlsdjfsljf fj wolfkjsd lksfjsl",
+      "img": "C:\\fakepath\\2.png",
+      "opening_stock": "5676",
+      "product_name": "sdwew",
+      "rate": "3242"
+    },
+    "-N9evNJ3XuCxIe5ZV9aR": {
+      "category": "keyboard",
+      "details": "ljgriog jreoigej rosgj iosje;s\n",
+      "img": "C:\\fakepath\\3.png",
+      "opening_stock": "567",
+      "product_name": "klfdjklj",
+      "rate": "2345"
+    },
+    "-N9pj4mAPR7eNaym89Iu": {
+      "category": "processor",
+      "details": "dfeweefw\n",
+      "img": "C:\\fakepath\\1.png",
+      "opening_stock": "2323",
+      "product_name": "sujal gupta",
+      "rate": "23423"
+    }
+  },
+  "user": {
+    "6490864816839643": {
+      "contact_no": "82818680140",
+      "email": "sujalgupta1221@gmail.com",
+      "first_name": "sujal",
+      "last_name": "gupta",
+      "password": "123456"
+    }
+  }
+}

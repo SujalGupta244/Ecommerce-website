@@ -34,7 +34,7 @@ const Login = () =>{
 
     const handleLoginGoogle = (e) =>{
         e.preventDefault()
-        // signUpWithGoogle()
+        signUpWithGoogle()
     }
     return (
         <div className="container">
